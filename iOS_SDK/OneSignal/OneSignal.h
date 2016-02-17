@@ -98,6 +98,7 @@ typedef NS_ENUM(NSUInteger, ONE_S_LOG_LEVEL) {
 
 - (void)enableInAppAlertNotification:(BOOL)enable;
 - (void)setSubscription:(BOOL)enable;
+- (void)alwaysResetBadgeCount:(BOOL)enable;
 
 - (void)postNotification:(NSDictionary*)jsonData;
 - (void)postNotification:(NSDictionary*)jsonData onSuccess:(OneSignalResultSuccessBlock)successBlock onFailure:(OneSignalFailureBlock)failureBlock;
