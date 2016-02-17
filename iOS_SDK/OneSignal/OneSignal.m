@@ -88,6 +88,7 @@ NSNumber* unSentActiveTime;
 NSNumber* timeToPingWith;
 int mNotificationTypes = -1;
 bool mSubscriptionSet = true;
+bool mAlwaysResetBadgeCount = false;
 static NSString* mSDKType = @"native";
 
 + (void)setMSDKType:(NSString*)str {
@@ -202,6 +203,10 @@ static NSString* mSDKType = @"native";
         trackIAPPurchase = [[OneSignalTrackIAP alloc] init];
     
     return self;
+}
+
+- (void)alwaysResetBadgeCount:(BOOL)enable {
+    mAlwaysResetBadgeCount = enable
 }
 
 + (void)setLogLevel:(ONE_S_LOG_LEVEL)nsLogLevel visualLevel:(ONE_S_LOG_LEVEL)visualLogLevel {
