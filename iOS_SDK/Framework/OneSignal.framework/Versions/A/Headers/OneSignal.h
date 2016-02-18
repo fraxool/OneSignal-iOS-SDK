@@ -96,6 +96,7 @@ typedef NS_ENUM(NSUInteger, ONE_S_LOG_LEVEL) {
 
 - (void)IdsAvailable:(OneSignalIdsAvailableBlock)idsAvailableBlock;
 
+- (void)alwaysResetBadgeCount:(BOOL)enable;
 - (void)enableInAppAlertNotification:(BOOL)enable;
 - (void)setSubscription:(BOOL)enable;
 
