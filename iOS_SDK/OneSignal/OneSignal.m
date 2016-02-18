@@ -88,7 +88,7 @@ NSNumber* unSentActiveTime;
 NSNumber* timeToPingWith;
 int mNotificationTypes = -1;
 bool mSubscriptionSet = true;
-bool mAlwaysResetBadgeCount = false;
+bool mAlwaysResetBadgeCount = true;
 static NSString* mSDKType = @"native";
 
 + (void)setMSDKType:(NSString*)str {
@@ -809,7 +809,7 @@ NSString* getUsableDeviceToken() {
 }
 
 bool clearBadgeCount(bool fromNotifOpened) {
-    if (mNotificationTypes == -1 || (mNotificationTypes & NOTIFICATION_TYPE_BADGE) == 0)
+    if (mNotificationTypes == -1 || (mNotificationTypes & NOTIFICATION_TYPE_BADGE) == 0 || mAlwaysResetBadgeCount == false)
         return false;
     
     bool wasBadgeSet = [UIApplication sharedApplication].applicationIconBadgeNumber > 0;
