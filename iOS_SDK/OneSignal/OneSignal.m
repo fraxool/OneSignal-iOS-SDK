@@ -1106,7 +1106,7 @@ int getNotificationTypes() {
     if(mAlwaysResetBadgeCount == false)
     {
         NSLog(@"updateNotificationBadgeCount");
-        //[self updateNotificationBadgeCount:nil onFailure:nil];
+        [self updateNotificationBadgeCount:nil onFailure:nil];
 
     }
 
