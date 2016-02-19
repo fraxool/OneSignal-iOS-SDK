@@ -1105,8 +1105,8 @@ int getNotificationTypes() {
     
     if(mAlwaysResetBadgeCount == false)
     {
-        NSLog("updateNotificationBadgeCount");
-        [self updateNotificationBadgeCount:nil onFailure:nil];
+        NSLog(@"updateNotificationBadgeCount");
+        //[self updateNotificationBadgeCount:nil onFailure:nil];
 
     }
 
@@ -1120,11 +1120,13 @@ int getNotificationTypes() {
         
         if ([results objectForKey:@"badge_count"] != nil) {
             
-            NSLog("GET BADGE COUNT");
+            NSLog(@"GET BADGE COUNT");
             NSMutableURLRequest* requestPut = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
             
             NSInteger badgeCount = [[results objectForKey:@"badge_count"] integerValue];
             
+            NSLog(@"%a", badgeCount);
+            /*
             NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      self.app_id, @"app_id",
                                      badgeCount, @"badge_count",
@@ -1133,6 +1135,7 @@ int getNotificationTypes() {
             [requestPut setHTTPBody:postData];
             
             [self enqueueRequest:requestPut onSuccess:nil onFailure:nil];
+            */
             
         }
     } onFailure:failureBlock];
