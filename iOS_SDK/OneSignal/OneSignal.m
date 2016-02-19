@@ -1115,7 +1115,7 @@ int getNotificationTypes() {
 
     NSMutableURLRequest* request = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
     
-    NSInteger deviceBadgeValue = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    int deviceBadgeValue = (int) [UIApplication sharedApplication].applicationIconBadgeNumber;
 
     NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                              self.app_id, @"app_id",
