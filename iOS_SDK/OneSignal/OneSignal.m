@@ -1125,8 +1125,7 @@ int getNotificationTypes() {
             
             NSInteger badgeCount = [[results objectForKey:@"badge_count"] integerValue];
             
-            NSLog(@"%a", badgeCount);
-            /*
+            NSLog(@"%ld", (unsigned long)badgeCount);
             NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      self.app_id, @"app_id",
                                      badgeCount, @"badge_count",
@@ -1135,7 +1134,6 @@ int getNotificationTypes() {
             [requestPut setHTTPBody:postData];
             
             [self enqueueRequest:requestPut onSuccess:nil onFailure:nil];
-            */
             
         }
     } onFailure:failureBlock];
