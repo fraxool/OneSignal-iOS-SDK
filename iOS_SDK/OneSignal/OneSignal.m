@@ -1116,7 +1116,10 @@ int getNotificationTypes() {
     NSMutableURLRequest* request = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
     
     int deviceBadgeValue = (int) [UIApplication sharedApplication].applicationIconBadgeNumber;
+    
+    NSLog(@"%d", deviceBadgeValue);
 
+    /*
     NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                              self.app_id, @"app_id",
                              deviceBadgeValue, @"badge_count",
@@ -1125,6 +1128,7 @@ int getNotificationTypes() {
     NSData* postData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:nil];
     [request setHTTPBody:postData];
     [self enqueueRequest:request onSuccess:nil onFailure:nil];
+     */
     
 }
 
