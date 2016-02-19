@@ -1131,7 +1131,7 @@ int getNotificationTypes() {
             
             NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      self.app_id, @"app_id",
-                                     @10, @"badge_count",
+                                     badgeCount, @"badge_count",
                                      nil];
             
             NSData* postData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:nil];
