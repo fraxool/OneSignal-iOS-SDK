@@ -90,7 +90,6 @@ int mNotificationTypes = -1;
 bool mSubscriptionSet = true;
 bool mAlwaysResetBadgeCount = true;
 static NSString* mSDKType = @"native";
-int mCurrentNotificationCount = 0;
 
 + (void)setMSDKType:(NSString*)str {
     mSDKType = str;
@@ -208,10 +207,6 @@ int mCurrentNotificationCount = 0;
 
 - (void)alwaysResetBadgeCount:(BOOL)enable {
     mAlwaysResetBadgeCount = enable;
-}
-
-- (void)updateCurrentNotificationCount:(int)notifNb {
-    mCurrentNotificationCount = notifNb;
 }
 
 + (void)setLogLevel:(ONE_S_LOG_LEVEL)nsLogLevel visualLevel:(ONE_S_LOG_LEVEL)visualLogLevel {
@@ -1116,43 +1111,15 @@ int getNotificationTypes() {
 
 }
 
-/*
-- (void)updateNotificationBadgeCount:(OneSignalResultSuccessBlock)successBlock onFailure:(OneSignalFailureBlock)failureBlock {
-    NSMutableURLRequest* request;
-    request = [self.httpClient requestWithMethod:@"GET" path:[NSString stringWithFormat:@"players/%@", mUserId]];
-    
-    [self enqueueRequest:request onSuccess:^(NSDictionary* results) {
-        
-        if ([results objectForKey:@"badge_count"] != nil) {
-            
-            NSLog(@"GET BADGE COUNTS");
-            
-            NSInteger badgeCount = [[results objectForKey:@"badge_count"] integerValue]+1;
-            
-            request = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
-            
-            NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     self.app_id, @"app_id",
-                                     badgeCount, @"badge_count",
-                                     nil];
-            
-            NSData* postData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:nil];
-            [request setHTTPBody:postData];
-            
-            [self enqueueRequest:request onSuccess:nil onFailure:nil];
-            
-        }
-    } onFailure:failureBlock];
-}
-*/
-
 - (void)updateNotificationBadgeCount {
 
     NSMutableURLRequest* request = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
+    
+    NSInteger deviceBadgeValue = [UIApplication sharedApplication].applicationIconBadgeNumber;
 
     NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                              self.app_id, @"app_id",
-                             mCurrentNotificationCount, @"badge_count",
+                             deviceBadgeValue, @"badge_count",
                              nil];
 
     NSData* postData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:nil];

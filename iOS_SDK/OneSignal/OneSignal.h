@@ -87,7 +87,6 @@ typedef NS_ENUM(NSUInteger, ONE_S_LOG_LEVEL) {
 - (void)getTags:(OneSignalResultSuccessBlock)successBlock onFailure:(OneSignalFailureBlock)failureBlock;
 - (void)getTags:(OneSignalResultSuccessBlock)successBlock;
 - (void)updateNotificationBadgeCount;
-- (void)updateCurrentNotificationCount:(int)notifNb;
 
 - (void)deleteTag:(NSString*)key onSuccess:(OneSignalResultSuccessBlock)successBlock onFailure:(OneSignalFailureBlock)failureBlock;
 - (void)deleteTag:(NSString*)key;
