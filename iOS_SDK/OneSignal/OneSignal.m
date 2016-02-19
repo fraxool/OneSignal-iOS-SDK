@@ -1120,16 +1120,20 @@ int getNotificationTypes() {
         
         if ([results objectForKey:@"badge_count"] != nil) {
             
-            NSLog(@"GET BADGE COUNT");
-            NSMutableURLRequest* requestPut = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
+            NSLog(@"GET BADGE COUNTS");
             
             NSInteger badgeCount = [[results objectForKey:@"badge_count"] integerValue];
             
             NSLog(@"%ld", (unsigned long)badgeCount);
+            
+            
+            NSMutableURLRequest* requestPut = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
+            
             NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      self.app_id, @"app_id",
-                                     badgeCount, @"badge_count",
+                                     @10, @"badge_count",
                                      nil];
+            
             NSData* postData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:nil];
             [requestPut setHTTPBody:postData];
             
