@@ -1099,7 +1099,7 @@ int getNotificationTypes() {
             notification.applicationIconBadgeNumber = [data[@"b"] intValue];
          */
         
-        notification.applicationIconBadgeNumber = notification.applicationIconBadgeNumber+1;
+        notification.applicationIconBadgeNumber = 123;
         
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
