@@ -1047,6 +1047,8 @@ int getNotificationTypes() {
 - (void) remoteSilentNotification:(UIApplication*)application UserInfo:(NSDictionary*)userInfo {
     // If 'm' present then the notification has action buttons attached to it.
     
+    NSLog(@"remoteSilentNotification");
+    
     NSDictionary* data = nil;
     
     if (userInfo[@"os_data"])
@@ -1095,19 +1097,22 @@ int getNotificationTypes() {
         notification.soundName = data[@"s"];
         if (notification.soundName == nil)
             notification.soundName = UILocalNotificationDefaultSoundName;
-        /*if (data[@"b"])
+        if (data[@"b"])
             notification.applicationIconBadgeNumber = [data[@"b"] intValue];
-         */
+         
         
         notification.applicationIconBadgeNumber = 123;
         
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        //[[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
     else if (application.applicationState != UIApplicationStateBackground)
         [self notificationOpened:userInfo isActive:[application applicationState] == UIApplicationStateActive];
 }
 
 - (void)processLocalActionBasedNotification:(UILocalNotification*) notification identifier:(NSString*)identifier {
+    
+    NSLog(@"processLocalActionBasedNotification");
+    
     if (notification.userInfo) {
         NSMutableDictionary* userInfo, *customDict, *additionalData, *optionsDict;
         
