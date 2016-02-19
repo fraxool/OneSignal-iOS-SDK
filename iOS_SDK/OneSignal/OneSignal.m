@@ -206,7 +206,7 @@ static NSString* mSDKType = @"native";
 }
 
 - (void)alwaysResetBadgeCount:(BOOL)enable {
-    mAlwaysResetBadgeCount = enable
+    mAlwaysResetBadgeCount = enable;
 }
 
 + (void)setLogLevel:(ONE_S_LOG_LEVEL)nsLogLevel visualLevel:(ONE_S_LOG_LEVEL)visualLogLevel {
