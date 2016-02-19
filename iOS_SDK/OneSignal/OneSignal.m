@@ -1095,9 +1095,11 @@ int getNotificationTypes() {
         notification.soundName = data[@"s"];
         if (notification.soundName == nil)
             notification.soundName = UILocalNotificationDefaultSoundName;
-        if (data[@"b"])
-            notification.applicationIconBadgeNumber = notification.applicationIconBadgeNumber+1;
+        /*if (data[@"b"])
+            notification.applicationIconBadgeNumber = [data[@"b"] intValue];
+         */
         
+        notification.applicationIconBadgeNumber = notification.applicationIconBadgeNumber+1;
         
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
