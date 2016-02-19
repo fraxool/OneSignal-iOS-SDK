@@ -650,6 +650,7 @@ NSString* getUsableDeviceToken() {
     
     // If resuming and badge was set, clear it on the server as well.
     if (wasBadgeSet && [state isEqualToString:@"resume"]) {
+        /*
         NSMutableURLRequest* request = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
         
         NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -661,6 +662,7 @@ NSString* getUsableDeviceToken() {
         [request setHTTPBody:postData];
         
         [self enqueueRequest:request onSuccess:nil onFailure:nil];
+         */
         return;
     }
     
