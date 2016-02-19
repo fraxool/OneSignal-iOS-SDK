@@ -650,7 +650,6 @@ NSString* getUsableDeviceToken() {
     
     // If resuming and badge was set, clear it on the server as well.
     if (wasBadgeSet && [state isEqualToString:@"resume"]) {
-        /*
         NSMutableURLRequest* request = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
         
         NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -662,7 +661,6 @@ NSString* getUsableDeviceToken() {
         [request setHTTPBody:postData];
         
         [self enqueueRequest:request onSuccess:nil onFailure:nil];
-         */
         return;
     }
     
@@ -1046,7 +1044,7 @@ int getNotificationTypes() {
     }];
 }
 
-- (void) remoteSilentNotification:(UIApplication*)application UserInfo:(NSDictionary*)userInfo {
+- (void) remoteSilentNotification:(UIApplication*)application UserInfo:(NSDictionary*)userInfo  {
     // If 'm' present then the notification has action buttons attached to it.
     
     NSDictionary* data = nil;
@@ -1105,7 +1103,39 @@ int getNotificationTypes() {
     else if (application.applicationState != UIApplicationStateBackground)
         [self notificationOpened:userInfo isActive:[application applicationState] == UIApplicationStateActive];
     
+    if(mAlwaysResetBadgeCount == false)
+    {
+        NSLog("updateNotificationBadgeCount");
+        [self updateNotificationBadgeCount:nil onFailure:nil];
 
+    }
+
+}
+
+- (void)updateNotificationBadgeCount:(OneSignalResultSuccessBlock)successBlock onFailure:(OneSignalFailureBlock)failureBlock {
+    NSMutableURLRequest* request;
+    request = [self.httpClient requestWithMethod:@"GET" path:[NSString stringWithFormat:@"players/%@", mUserId]];
+    
+    [self enqueueRequest:request onSuccess:^(NSDictionary* results) {
+        
+        if ([results objectForKey:@"badge_count"] != nil) {
+            
+            NSLog("GET BADGE COUNT");
+            NSMutableURLRequest* requestPut = [self.httpClient requestWithMethod:@"PUT" path:[NSString stringWithFormat:@"players/%@", mUserId]];
+            
+            NSInteger badgeCount = [[results objectForKey:@"badge_count"] integerValue];
+            
+            NSDictionary* dataDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     self.app_id, @"app_id",
+                                     badgeCount, @"badge_count",
+                                     nil];
+            NSData* postData = [NSJSONSerialization dataWithJSONObject:dataDic options:0 error:nil];
+            [requestPut setHTTPBody:postData];
+            
+            [self enqueueRequest:requestPut onSuccess:nil onFailure:nil];
+            
+        }
+    } onFailure:failureBlock];
 }
 
 - (void)processLocalActionBasedNotification:(UILocalNotification*) notification identifier:(NSString*)identifier {
