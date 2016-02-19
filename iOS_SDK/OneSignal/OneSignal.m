@@ -1098,14 +1098,12 @@ int getNotificationTypes() {
         if (data[@"b"])
             notification.applicationIconBadgeNumber = [data[@"b"] intValue];
          
-                
-        //[[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        
     }
     else if (application.applicationState != UIApplicationStateBackground)
         [self notificationOpened:userInfo isActive:[application applicationState] == UIApplicationStateActive];
     
-    // Update the app icon badge
-    [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
+
 }
 
 - (void)processLocalActionBasedNotification:(UILocalNotification*) notification identifier:(NSString*)identifier {
